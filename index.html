@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sweet Heaven | Artisan Luxury Bakery</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,900&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons & Slider CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #fff8f0; /* Cream */
+        --primary: #d4af37; /* Gold */
+        --secondary: #8b5e3c; /* Bronze */
+        --text: #5d4037; /* Deep Brown (Pengganti Hitam) */
+        --accent: #fadadd; /* Soft Pink */
+        --white: #ffffff;
+        --glass: rgba(255, 248, 240, 0.85);
+        --font-h: "Playfair Display", serif;
+        --font-b: "Poppins", sans-serif;
+      }
+
+      /* Base Setup */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: initial;
+      }
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font-b);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+
+      /* --- LOADING SCREEN --- */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader-text {
+        font-family: var(--font-h);
+        font-size: 2rem;
+        color: var(--primary);
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 30px 0;
+        z-index: 1000;
+        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      nav.scrolled {
+        padding: 15px 0;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      }
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-family: var(--font-h);
+        font-size: 2rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--secondary);
+        letter-spacing: -1px;
+      }
+      .logo span {
+        color: var(--primary);
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      /* --- HERO --- */
+      .hero {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: sepia(0.2) brightness(0.8);
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(139, 94, 60, 0.2),
+          var(--bg)
+        );
+      }
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        color: var(--white);
+        text-shadow: 0 2px 10px rgba(93, 64, 55, 0.3);
+      }
+      .hero-tag {
+        font-size: 0.9rem;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .hero-title {
+        font-family: var(--font-h);
+        font-size: clamp(3rem, 10vw, 8rem);
+        line-height: 0.9;
+        margin-bottom: 30px;
+      }
+
+      .btn-gold {
+        display: inline-block;
+        padding: 18px 45px;
+        background: var(--primary);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: 100px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        transition: 0.4s;
+        border: 1px solid var(--primary);
+      }
+      .btn-gold:hover {
+        background: transparent;
+        color: var(--primary);
+        transform: translateY(-5px);
+      }
+
+      /* --- SECTION GENERIC --- */
+      .section {
+        padding: 120px 0;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .sub-title {
+        color: var(--primary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+      .main-title {
+        font-family: var(--font-h);
+        font-size: 3.5rem;
+        color: var(--secondary);
+        margin-bottom: 60px;
+      }
+
+      /* --- PRODUCTS GRID --- */
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 40px;
+      }
+      .product-card {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 40px;
+        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 15px 40px rgba(139, 94, 60, 0.05);
+      }
+      .product-card:hover {
+        transform: translateY(-20px);
+        box-shadow: 0 30px 60px rgba(139, 94, 60, 0.15);
+      }
+      .p-img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 30px;
+        overflow: hidden;
+        margin-bottom: 25px;
+      }
+      .p-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 1s;
+      }
+      .product-card:hover .p-img img {
+        scale: 1.1;
+      }
+      .p-info h3 {
+        font-family: var(--font-h);
+        font-size: 1.6rem;
+        color: var(--secondary);
+        margin-bottom: 10px;
+      }
+      .p-info p {
+        font-size: 0.9rem;
+        color: var(--text);
+        opacity: 0.8;
+        margin-bottom: 15px;
+      }
+      .p-price {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.2rem;
+        display: block;
+      }
+
+      /* --- ABOUT --- */
+      .about-flex {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        flex-wrap: wrap;
+      }
+      .about-img {
+        flex: 1;
+        min-width: 350px;
+        position: relative;
+      }
+      .about-img img {
+        width: 100%;
+        border-radius: 60px 5px 60px 5px;
+      }
+      .about-content {
+        flex: 1;
+        min-width: 350px;
+      }
+      .about-content h2 {
+        font-family: var(--font-h);
+        font-size: 3.5rem;
+        color: var(--secondary);
+        line-height: 1.1;
+        margin-bottom: 30px;
+      }
+
+      /* --- FAQ --- */
+      .faq-list {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .faq-item {
+        background: var(--white);
+        border-radius: 20px;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+      .faq-q {
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--secondary);
+      }
+      .faq-a {
+        padding: 0 30px;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: 0.4s;
+      }
+      .faq-item.active .faq-a {
+        height: auto;
+        padding-bottom: 25px;
+        opacity: 1;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background: #fdf5eb;
+        padding: 100px 0 40px;
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+      .footer-col h4 {
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+      }
+      .footer-col li {
+        list-style: none;
+        margin-bottom: 15px;
+      }
+      .footer-col a {
+        text-decoration: none;
+        color: var(--text);
+        opacity: 0.7;
+        transition: 0.3s;
+      }
+      .footer-col a:hover {
+        opacity: 1;
+        color: var(--primary);
+      }
+      .social-links {
+        display: flex;
+        gap: 20px;
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+      .social-links a {
+        color: var(--secondary);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hero-title {
+          font-size: 3.5rem;
+        }
+        .main-title {
+          font-size: 2.5rem;
+        }
+        .about-content h2 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div id="loader"><div class="loader-text">Sweet Heaven</div></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="container nav-inner">
+        <a href="#" class="logo">Sweet <span>Heaven</span></a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">Philosophy</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#faq">Questions</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a
+          href="#menu"
+          class="btn-gold"
+          style="padding: 12px 30px; font-size: 0.7rem"
+          >Order Now</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source
+          src="https://assets.mixkit.co/videos/preview/mixkit-confectioner-decorating-a-cake-with-cream-18045-large.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-tag reveal">Luxury Artisan Bakery</span>
+        <h1 class="hero-title reveal">The Art of <br />Pure Sweetness</h1>
+        <div class="reveal">
+          <a href="#menu" class="btn-gold">Discover Collection</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section container" id="about">
+      <div class="about-flex">
+        <div class="about-img reveal">
+          <img
+            src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200"
+            alt="Bakery Story"
+          />
+        </div>
+        <div class="about-content">
+          <span class="sub-title reveal">Our Philosophy</span>
+          <h2 class="reveal">Dibuat Dengan <br />Bahan Organik Terbaik</h2>
+          <p class="reveal">
+            Setiap resep di Sweet Heaven dikurasi selama puluhan tahun. Kami
+            hanya menggunakan cokelat Belgia autentik, mentega Prancis pilihan,
+            dan vanilla Madagaskar asli untuk menjamin kemewahan rasa di setiap
+            gigitan.
+          </p>
+          <br />
+          <a href="#" class="btn-gold reveal">Read Our Story</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="text-center">
+          <span class="sub-title reveal">Collection 2024</span>
+          <h2 class="main-title reveal">Signature Creations</h2>
+        </div>
+
+        <div class="product-grid">
+          <!-- 1 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Velvet Royale</h3>
+              <p>
+                Kue merah lembut dengan krim keju premium dan serpihan emas.
+              </p>
+              <span class="p-price">Rp 450.000</span>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Truffle Gold</h3>
+              <p>Dark chocolate ganache 70% dengan tekstur ultra-lembut.</p>
+              <span class="p-price">Rp 520.000</span>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Parisian Macarons</h3>
+              <p>Set kotak isi 12 macaron autentik dengan rasa musim semi.</p>
+              <span class="p-price">Rp 240.000</span>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1464347744102-11db6282f854?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Berry Blossom</h3>
+              <p>Tart buah segar dengan krim custard vanilla Madagaskar.</p>
+              <span class="p-price">Rp 380.000</span>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Golden Croissant</h3>
+              <p>Pastry renyah dengan lapisan mentega AOP Prancis.</p>
+              <span class="p-price">Rp 45.000</span>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Matcha Zenith</h3>
+              <p>Kue teh hijau Uji Kyoto dengan lapisan cokelat putih.</p>
+              <span class="p-price">Rp 480.000</span>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Vanilla Orchid</h3>
+              <p>Ekstrak vanilla murni dan aroma bunga.</p>
+              <span class="p-price">Rp 410.000</span>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Caramel Cloud</h3>
+              <p>Mousse karamel garam laut yang ringan.</p>
+              <span class="p-price">Rp 425.000</span>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Artisan Sourdough</h3>
+              <p>Roti gandum dengan fermentasi alami 24 jam.</p>
+              <span class="p-price">Rp 85.000</span>
+            </div>
+          </div>
+          <!-- 10 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Tiramisu Silk</h3>
+              <p>Espresso Arabica dengan keju Mascarpone.</p>
+              <span class="p-price">Rp 550.000</span>
+            </div>
+          </div>
+          <!-- 11 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1519340333755-56e9c1d04579?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Lemon Zest</h3>
+              <p>Kesegaran buah lemon Sisilia yang elegan.</p>
+              <span class="p-price">Rp 320.000</span>
+            </div>
+          </div>
+          <!-- 12 -->
+          <div class="product-card reveal">
+            <div class="p-img">
+              <img
+                src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=800"
+                alt=""
+              />
+            </div>
+            <div class="p-info">
+              <h3>Wedding White</h3>
+              <p>Kue pengantin 3 tingkat yang megah.</p>
+              <span class="p-price">Rp 2.800.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section container" id="faq">
+      <div class="text-center">
+        <h2 class="main-title reveal">Common Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q">
+            Apakah menerima pesanan Custom? <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-a">
+            Ya, kami melayani pesanan kue kustom untuk pernikahan, ulang tahun,
+            dan acara perusahaan dengan janji temu sebelumnya.
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q">
+            Bagaimana sistem pengirimannya? <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-a">
+            Kami menggunakan kurir khusus dengan kendaraan berpendingin untuk
+            memastikan kualitas kue tetap sempurna saat sampai.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <a href="#" class="logo">Sweet <span>Heaven</span></a>
+          <p style="margin-top: 20px">
+            Menghadirkan standar patisserie internasional ke meja Anda sejak
+            1995. Kemewahan dalam setiap gigitan.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Our Philosophy</a></li>
+            <li><a href="#menu">Signature Menu</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Inquiry</h4>
+          <ul>
+            <li>Jakarta, Indonesia</li>
+            <li>hello@sweetheaven.com</li>
+            <li>+62 812 3456 789</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        &copy; 2024 SWEET HEAVEN BAKERY. DESIGNED FOR ELEGANCE. NO BLACK USED.
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <script>
+      // Smooth Scroll Lenis
+      const lenis = new Lenis();
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // GSAP Animations
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Loader
+      window.addEventListener("load", () => {
+        gsap.to("#loader", {
+          yPercent: -100,
+          duration: 1.2,
+          ease: "expo.inOut",
+          delay: 0.5,
+        });
+
+        // Hero
+        gsap.to(".hero-title", {
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+          ease: "expo.out",
+          delay: 1,
+        });
+        gsap.to(".hero-tag", { opacity: 1, y: 0, duration: 1, delay: 0.8 });
+      });
+
+      // Scroll Reveals
+      gsap.utils.toArray(".reveal").forEach((el) => {
+        gsap.to(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
+        });
+      });
+
+      // Navbar Scroll
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("navbar");
+        if (window.scrollY > 80) nav.classList.add("scrolled");
+        else nav.classList.remove("scrolled");
+      });
+
+      // FAQ Toggle
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          item.classList.toggle("active");
+          const icon = item.querySelector("i");
+          icon.classList.toggle("fa-plus");
+          icon.classList.toggle("fa-minus");
+        });
+      });
+    </script>
+  </body>
+</html>
