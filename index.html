@@ -3,770 +3,1077 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sweet Heaven | Artisan Luxury Bakery</title>
+    <title>Sweet Heaven — Luxury Bakery &amp; Patisserie</title>
+    <meta
+      name="description"
+      content="Sweet Heaven — handcrafted patisserie, baked fresh every morning with premium ingredients."
+    />
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,900&family=Poppins:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Icons & Slider CSS -->
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
-    <style>
-      :root {
-        --bg: #fff8f0; /* Cream */
-        --primary: #d4af37; /* Gold */
-        --secondary: #8b5e3c; /* Bronze */
-        --text: #5d4037; /* Deep Brown (Pengganti Hitam) */
-        --accent: #fadadd; /* Soft Pink */
-        --white: #ffffff;
-        --glass: rgba(255, 248, 240, 0.85);
-        --font-h: "Playfair Display", serif;
-        --font-b: "Poppins", sans-serif;
-      }
-
-      /* Base Setup */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: initial;
-      }
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: var(--font-b);
-        overflow-x: hidden;
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 5%;
-      }
-
-      /* --- LOADING SCREEN --- */
-      #loader {
-        position: fixed;
-        inset: 0;
-        background: var(--bg);
-        z-index: 10000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .loader-text {
-        font-family: var(--font-h);
-        font-size: 2rem;
-        color: var(--primary);
-      }
-
-      /* --- NAVIGATION --- */
-      nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        padding: 30px 0;
-        z-index: 1000;
-        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      nav.scrolled {
-        padding: 15px 0;
-        background: var(--glass);
-        backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-      }
-      .nav-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo {
-        font-family: var(--font-h);
-        font-size: 2rem;
-        font-weight: 800;
-        text-decoration: none;
-        color: var(--secondary);
-        letter-spacing: -1px;
-      }
-      .logo span {
-        color: var(--primary);
-      }
-      .nav-links {
-        display: flex;
-        gap: 40px;
-        list-style: none;
-      }
-      .nav-links a {
-        text-decoration: none;
-        color: var(--text);
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-      .nav-links a:hover {
-        color: var(--primary);
-      }
-
-      /* --- HERO --- */
-      .hero {
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-      .hero-video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: sepia(0.2) brightness(0.8);
-      }
-      .hero-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(139, 94, 60, 0.2),
-          var(--bg)
-        );
-      }
-      .hero-content {
-        position: relative;
-        z-index: 10;
-        color: var(--white);
-        text-shadow: 0 2px 10px rgba(93, 64, 55, 0.3);
-      }
-      .hero-tag {
-        font-size: 0.9rem;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        display: block;
-      }
-      .hero-title {
-        font-family: var(--font-h);
-        font-size: clamp(3rem, 10vw, 8rem);
-        line-height: 0.9;
-        margin-bottom: 30px;
-      }
-
-      .btn-gold {
-        display: inline-block;
-        padding: 18px 45px;
-        background: var(--primary);
-        color: var(--white);
-        text-decoration: none;
-        border-radius: 100px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.8rem;
-        transition: 0.4s;
-        border: 1px solid var(--primary);
-      }
-      .btn-gold:hover {
-        background: transparent;
-        color: var(--primary);
-        transform: translateY(-5px);
-      }
-
-      /* --- SECTION GENERIC --- */
-      .section {
-        padding: 120px 0;
-      }
-      .text-center {
-        text-align: center;
-      }
-      .sub-title {
-        color: var(--primary);
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 4px;
-        font-size: 0.8rem;
-        margin-bottom: 15px;
-        display: block;
-      }
-      .main-title {
-        font-family: var(--font-h);
-        font-size: 3.5rem;
-        color: var(--secondary);
-        margin-bottom: 60px;
-      }
-
-      /* --- PRODUCTS GRID --- */
-      .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 40px;
-      }
-      .product-card {
-        background: var(--white);
-        padding: 20px;
-        border-radius: 40px;
-        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 15px 40px rgba(139, 94, 60, 0.05);
-      }
-      .product-card:hover {
-        transform: translateY(-20px);
-        box-shadow: 0 30px 60px rgba(139, 94, 60, 0.15);
-      }
-      .p-img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        border-radius: 30px;
-        overflow: hidden;
-        margin-bottom: 25px;
-      }
-      .p-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 1s;
-      }
-      .product-card:hover .p-img img {
-        scale: 1.1;
-      }
-      .p-info h3 {
-        font-family: var(--font-h);
-        font-size: 1.6rem;
-        color: var(--secondary);
-        margin-bottom: 10px;
-      }
-      .p-info p {
-        font-size: 0.9rem;
-        color: var(--text);
-        opacity: 0.8;
-        margin-bottom: 15px;
-      }
-      .p-price {
-        font-weight: 700;
-        color: var(--primary);
-        font-size: 1.2rem;
-        display: block;
-      }
-
-      /* --- ABOUT --- */
-      .about-flex {
-        display: flex;
-        align-items: center;
-        gap: 80px;
-        flex-wrap: wrap;
-      }
-      .about-img {
-        flex: 1;
-        min-width: 350px;
-        position: relative;
-      }
-      .about-img img {
-        width: 100%;
-        border-radius: 60px 5px 60px 5px;
-      }
-      .about-content {
-        flex: 1;
-        min-width: 350px;
-      }
-      .about-content h2 {
-        font-family: var(--font-h);
-        font-size: 3.5rem;
-        color: var(--secondary);
-        line-height: 1.1;
-        margin-bottom: 30px;
-      }
-
-      /* --- FAQ --- */
-      .faq-list {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      .faq-item {
-        background: var(--white);
-        border-radius: 20px;
-        margin-bottom: 15px;
-        overflow: hidden;
-      }
-      .faq-q {
-        padding: 25px 30px;
-        display: flex;
-        justify-content: space-between;
-        cursor: pointer;
-        font-weight: 600;
-        color: var(--secondary);
-      }
-      .faq-a {
-        padding: 0 30px;
-        height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: 0.4s;
-      }
-      .faq-item.active .faq-a {
-        height: auto;
-        padding-bottom: 25px;
-        opacity: 1;
-      }
-
-      /* --- FOOTER --- */
-      footer {
-        background: #fdf5eb;
-        padding: 100px 0 40px;
-        border-top: 1px solid rgba(212, 175, 55, 0.1);
-      }
-      .footer-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 60px;
-        margin-bottom: 60px;
-      }
-      .footer-col h4 {
-        color: var(--primary);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-      }
-      .footer-col li {
-        list-style: none;
-        margin-bottom: 15px;
-      }
-      .footer-col a {
-        text-decoration: none;
-        color: var(--text);
-        opacity: 0.7;
-        transition: 0.3s;
-      }
-      .footer-col a:hover {
-        opacity: 1;
-        color: var(--primary);
-      }
-      .social-links {
-        display: flex;
-        gap: 20px;
-        font-size: 1.5rem;
-        margin-top: 20px;
-      }
-      .social-links a {
-        color: var(--secondary);
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      /* Mobile Responsive */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-        }
-        .hero-title {
-          font-size: 3.5rem;
-        }
-        .main-title {
-          font-size: 2.5rem;
-        }
-        .about-content h2 {
-          font-size: 2.5rem;
-        }
-      }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <!-- Loader -->
-    <div id="loader"><div class="loader-text">Sweet Heaven</div></div>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-      <div class="container nav-inner">
-        <a href="#" class="logo">Sweet <span>Heaven</span></a>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">Philosophy</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#faq">Questions</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a
-          href="#menu"
-          class="btn-gold"
-          style="padding: 12px 30px; font-size: 0.7rem"
-          >Order Now</a
-        >
+    <!-- ============ LOADING SCREEN ============ -->
+    <div class="loader" id="loader">
+      <svg class="loader__ring" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="54"></circle>
+      </svg>
+      <div class="loader__mark">
+        <span>S</span><span>w</span><span>e</span><span>e</span><span>t</span>
+        <span class="loader__gap"></span>
+        <span>H</span><span>e</span><span>a</span><span>v</span><span>e</span
+        ><span>n</span>
       </div>
-    </nav>
+      <p class="loader__label">Luxury Patisserie</p>
+    </div>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-confectioner-decorating-a-cake-with-cream-18045-large.mp4"
-          type="video/mp4"
-        />
-      </video>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <span class="hero-tag reveal">Luxury Artisan Bakery</span>
-        <h1 class="hero-title reveal">The Art of <br />Pure Sweetness</h1>
-        <div class="reveal">
-          <a href="#menu" class="btn-gold">Discover Collection</a>
+    <!-- ============ SCROLL PROGRESS ============ -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ============ CUSTOM CURSOR ============ -->
+    <div class="cursor" id="cursor">
+      <span class="cursor__label" id="cursorLabel"></span>
+    </div>
+
+    <!-- ============ NAVBAR ============ -->
+    <header class="navbar" id="navbar">
+      <div class="navbar__inner">
+        <a href="#hero" class="navbar__logo">Sweet<span>Heaven</span></a>
+
+        <nav class="navbar__menu" id="navMenu">
+          <a href="#about" class="navbar__link"><span>About</span></a>
+          <a href="#craft" class="navbar__link"><span>The Craft</span></a>
+          <a href="#products" class="navbar__link"><span>Menu</span></a>
+          <a href="#gallery" class="navbar__link"><span>Gallery</span></a>
+          <a href="#contact" class="navbar__link"><span>Contact</span></a>
+        </nav>
+
+        <div class="navbar__actions">
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--outline btn--sm"
+            data-cursor="Chat"
+            >Order Now</a
+          >
+          <button
+            class="navbar__toggle"
+            id="navToggle"
+            aria-label="Toggle menu"
+          >
+            <span></span><span></span>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- About -->
-    <section class="section container" id="about">
-      <div class="about-flex">
-        <div class="about-img reveal">
-          <img
-            src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200"
-            alt="Bakery Story"
-          />
-        </div>
-        <div class="about-content">
-          <span class="sub-title reveal">Our Philosophy</span>
-          <h2 class="reveal">Dibuat Dengan <br />Bahan Organik Terbaik</h2>
-          <p class="reveal">
-            Setiap resep di Sweet Heaven dikurasi selama puluhan tahun. Kami
-            hanya menggunakan cokelat Belgia autentik, mentega Prancis pilihan,
-            dan vanilla Madagaskar asli untuk menjamin kemewahan rasa di setiap
-            gigitan.
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about">About</a>
+      <a href="#craft">The Craft</a>
+      <a href="#products">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="hero">
+        <div class="hero__grain" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="eyebrow reveal-fade">Luxury Bakery — Est. 1998</p>
+          <h1 class="hero__title" id="heroTitle" data-split>
+            <span class="reveal-line" data-line>Kue Mewah,</span>
+            <span class="reveal-line" data-line
+              ><span class="italic">Rasa Abadi</span></span
+            >
+          </h1>
+          <p class="hero__desc reveal-fade">
+            Diracik tangan pastry chef berpengalaman dengan mentega Prancis dan
+            cokelat single-origin — dipanggang segar setiap pagi, untuk momen
+            yang layak dirayakan.
           </p>
-          <br />
-          <a href="#" class="btn-gold reveal">Read Our Story</a>
+          <div class="hero__actions reveal-fade">
+            <a
+              href="https://wa.me/6281234567890"
+              target="_blank"
+              rel="noopener"
+              class="btn btn--primary magnetic"
+              data-cursor="Order"
+              >Order Now</a
+            >
+            <a href="#products" class="btn btn--ghost magnetic"
+              >Explore Menu <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="hero__proof reveal-fade">
+            <div class="hero__proof-avatars">
+              <img
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop"
+                alt=""
+              />
+              <img
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop"
+                alt=""
+              />
+            </div>
+            <div class="hero__proof-text">
+              <span class="hero__proof-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </span>
+              <span>Dipercaya 1.200+ pelanggan di Medan</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <div class="hero__image-wrap" data-parallax>
+            <img
+              src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1400&auto=format&fit=crop"
+              alt="Signature layered cake by Sweet Heaven"
+              class="hero__image"
+            />
+          </div>
+          <div class="hero__badge">
+            <span class="hero__badge-num" data-count="28">0</span>
+            <span class="hero__badge-text">Years of<br />Craftsmanship</span>
+          </div>
+        </div>
+        <div class="hero__scroll">
+          <span></span>
+          <p>Scroll</p>
+        </div>
+      </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Handcrafted Daily</span><span class="marquee__dot">•</span>
+          <span>Premium French Butter</span><span class="marquee__dot">•</span>
+          <span>Single-Origin Chocolate</span
+          ><span class="marquee__dot">•</span>
+          <span>Baked Fresh Every Morning</span
+          ><span class="marquee__dot">•</span> <span>No Preservatives</span
+          ><span class="marquee__dot">•</span> <span>Handcrafted Daily</span
+          ><span class="marquee__dot">•</span> <span>Premium French Butter</span
+          ><span class="marquee__dot">•</span>
+          <span>Single-Origin Chocolate</span
+          ><span class="marquee__dot">•</span>
+          <span>Baked Fresh Every Morning</span
+          ><span class="marquee__dot">•</span> <span>No Preservatives</span
+          ><span class="marquee__dot">•</span>
         </div>
       </div>
-    </section>
 
-    <!-- Menu -->
-    <section class="section" id="menu">
-      <div class="container">
-        <div class="text-center">
-          <span class="sub-title reveal">Collection 2024</span>
-          <h2 class="main-title reveal">Signature Creations</h2>
+      <!-- ============ ABOUT ============ -->
+      <section class="about" id="about">
+        <div class="container about__grid">
+          <div class="about__image reveal-image">
+            <img
+              src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1200&auto=format&fit=crop"
+              alt="Pastry chef finishing a cake at Sweet Heaven"
+            />
+          </div>
+          <div class="about__text">
+            <p class="eyebrow reveal-fade">Our Story</p>
+            <h2 class="reveal-fade">
+              Dibuat dengan tangan,
+              <span class="italic">disempurnakan dengan waktu.</span>
+            </h2>
+            <p class="reveal-fade">
+              Sweet Heaven lahir dari kecintaan pada detail — setiap lapisan,
+              setiap tekstur, dirancang untuk memberi momen tenang di tengah
+              hari yang sibuk.
+            </p>
+            <p class="reveal-fade">
+              Kami memilih bahan dari petani dan produsen terpercaya, lalu
+              membiarkan keahlian tangan berbicara lebih dari sekadar resep.
+            </p>
+            <a href="#craft" class="link-underline reveal-fade"
+              >Discover our craft</a
+            >
+          </div>
         </div>
+      </section>
 
-        <div class="product-grid">
-          <!-- 1 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Velvet Royale</h3>
-              <p>
-                Kue merah lembut dengan krim keju premium dan serpihan emas.
-              </p>
-              <span class="p-price">Rp 450.000</span>
-            </div>
+      <!-- ============ STATS ============ -->
+      <section class="stats">
+        <div class="container stats__grid">
+          <div class="stat reveal-up">
+            <span class="stat__num" data-count="28">0</span>
+            <span class="stat__label">Years of Craft</span>
           </div>
-          <!-- 2 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Truffle Gold</h3>
-              <p>Dark chocolate ganache 70% dengan tekstur ultra-lembut.</p>
-              <span class="p-price">Rp 520.000</span>
-            </div>
+          <div class="stat reveal-up">
+            <span class="stat__num" data-count="120">0</span>
+            <span class="stat__label">Recipes Perfected</span>
           </div>
-          <!-- 3 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Parisian Macarons</h3>
-              <p>Set kotak isi 12 macaron autentik dengan rasa musim semi.</p>
-              <span class="p-price">Rp 240.000</span>
-            </div>
+          <div class="stat reveal-up">
+            <span class="stat__num" data-count="45" data-suffix="K">0</span>
+            <span class="stat__label">Happy Customers</span>
           </div>
-          <!-- 4 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1464347744102-11db6282f854?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Berry Blossom</h3>
-              <p>Tart buah segar dengan krim custard vanilla Madagaskar.</p>
-              <span class="p-price">Rp 380.000</span>
-            </div>
+          <div class="stat reveal-up">
+            <span class="stat__num" data-count="6">0</span>
+            <span class="stat__label">Cities Served</span>
           </div>
-          <!-- 5 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Golden Croissant</h3>
-              <p>Pastry renyah dengan lapisan mentega AOP Prancis.</p>
-              <span class="p-price">Rp 45.000</span>
-            </div>
+        </div>
+      </section>
+
+      <!-- ============ THE CRAFT (process) ============ -->
+      <section class="craft" id="craft">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow reveal-fade">The Craft</p>
+            <h2 class="reveal-fade">From Ingredient to Table</h2>
           </div>
-          <!-- 6 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=800"
-                alt=""
-              />
+
+          <div class="craft__timeline">
+            <div class="craft__line" aria-hidden="true">
+              <svg viewBox="0 0 4 800" preserveAspectRatio="none">
+                <path class="craft__line-path" d="M2,0 L2,800" />
+              </svg>
             </div>
-            <div class="p-info">
-              <h3>Matcha Zenith</h3>
-              <p>Kue teh hijau Uji Kyoto dengan lapisan cokelat putih.</p>
-              <span class="p-price">Rp 480.000</span>
+
+            <div class="craft__step reveal-up">
+              <span class="craft__num">01</span>
+              <div class="craft__body">
+                <h3>Select the Ingredients</h3>
+                <p>
+                  Mentega Prancis, cokelat single-origin, dan buah musiman
+                  dipilih langsung dari mitra tepercaya kami.
+                </p>
+              </div>
             </div>
-          </div>
-          <!-- 7 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800"
-                alt=""
-              />
+
+            <div class="craft__step reveal-up">
+              <span class="craft__num">02</span>
+              <div class="craft__body">
+                <h3>Shape by Hand</h3>
+                <p>
+                  Setiap adonan diracik dan dibentuk manual oleh pengrajin,
+                  tanpa jalan pintas produksi massal.
+                </p>
+              </div>
             </div>
-            <div class="p-info">
-              <h3>Vanilla Orchid</h3>
-              <p>Ekstrak vanilla murni dan aroma bunga.</p>
-              <span class="p-price">Rp 410.000</span>
+
+            <div class="craft__step reveal-up">
+              <span class="craft__num">03</span>
+              <div class="craft__body">
+                <h3>Bake to Perfection</h3>
+                <p>
+                  Dipanggang pada suhu dan waktu yang presisi untuk tekstur yang
+                  konsisten di setiap gigitan.
+                </p>
+              </div>
             </div>
-          </div>
-          <!-- 8 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Caramel Cloud</h3>
-              <p>Mousse karamel garam laut yang ringan.</p>
-              <span class="p-price">Rp 425.000</span>
-            </div>
-          </div>
-          <!-- 9 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Artisan Sourdough</h3>
-              <p>Roti gandum dengan fermentasi alami 24 jam.</p>
-              <span class="p-price">Rp 85.000</span>
-            </div>
-          </div>
-          <!-- 10 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Tiramisu Silk</h3>
-              <p>Espresso Arabica dengan keju Mascarpone.</p>
-              <span class="p-price">Rp 550.000</span>
-            </div>
-          </div>
-          <!-- 11 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1519340333755-56e9c1d04579?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Lemon Zest</h3>
-              <p>Kesegaran buah lemon Sisilia yang elegan.</p>
-              <span class="p-price">Rp 320.000</span>
-            </div>
-          </div>
-          <!-- 12 -->
-          <div class="product-card reveal">
-            <div class="p-img">
-              <img
-                src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=800"
-                alt=""
-              />
-            </div>
-            <div class="p-info">
-              <h3>Wedding White</h3>
-              <p>Kue pengantin 3 tingkat yang megah.</p>
-              <span class="p-price">Rp 2.800.000</span>
+
+            <div class="craft__step reveal-up">
+              <span class="craft__num">04</span>
+              <div class="craft__body">
+                <h3>Served Fresh</h3>
+                <p>
+                  Dikemas dan diantar dalam hitungan jam, menjaga kesegaran
+                  hingga sampai ke tangan Anda.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FAQ -->
-    <section class="section container" id="faq">
-      <div class="text-center">
-        <h2 class="main-title reveal">Common Questions</h2>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item reveal">
-          <div class="faq-q">
-            Apakah kami menerima costum ? <i class="fas fa-plus"></i>
-          </div>
-          <div class="faq-a">
-            Ya, kami melayani pesanan kue kustom untuk pernikahan, ulang tahun,
-            dan acara perusahaan dengan janji temu sebelumnya.
+      <!-- ============ FEATURES ============ -->
+      <section class="features">
+        <div class="container">
+          <div class="features__grid">
+            <div class="feature-card reveal-up">
+              <i class="fa-light fa-hand-sparkles"></i>
+              <h3>Handcrafted Daily</h3>
+              <p>Dibuat langsung oleh tangan pengrajin setiap harinya.</p>
+            </div>
+            <div class="feature-card reveal-up">
+              <i class="fa-light fa-wheat-awn"></i>
+              <h3>Premium Ingredients</h3>
+              <p>Bahan pilihan dari sumber terbaik di dunia.</p>
+            </div>
+            <div class="feature-card reveal-up">
+              <i class="fa-light fa-sun"></i>
+              <h3>Fresh Every Morning</h3>
+              <p>Dipanggang segar setiap pagi tanpa pengawet.</p>
+            </div>
+            <div class="feature-card reveal-up">
+              <i class="fa-light fa-truck"></i>
+              <h3>Fast Delivery</h3>
+              <p>Pengiriman cepat menjaga kualitas dan kesegaran.</p>
+            </div>
           </div>
         </div>
-        <div class="faq-item reveal">
-          <div class="faq-q">
-            Bagaimana sistem pengirimannya? <i class="fas fa-plus"></i>
+      </section>
+
+      <!-- ============ PRODUCTS ============ -->
+      <section class="products" id="products">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow reveal-fade">Our Menu</p>
+            <h2 class="reveal-fade">Signature Creations</h2>
           </div>
-          <div class="faq-a">
-            Kami menggunakan kurir khusus dengan kendaraan berpendingin untuk
-            memastikan kualitas kue tetap sempurna saat sampai.
+
+          <div class="products__tabs reveal-fade" role="tablist">
+            <button class="tab is-active" data-filter="all">All</button>
+            <button class="tab" data-filter="cake">Cakes</button>
+            <button class="tab" data-filter="pastry">Pastries</button>
+            <button class="tab" data-filter="petit">Petits Fours</button>
+          </div>
+
+          <div class="products__grid" id="productsGrid">
+            <article
+              class="product-card reveal-up"
+              data-cat="pastry"
+              data-name="Éclair au Chocolat"
+              data-price="Rp 68.000"
+              data-rating="4.9"
+              data-desc="Choux pastry lembut diisi krim vanila Madagaskar, dilapisi glasir cokelat Valrhona."
+              data-img="https://images.unsplash.com/photo-1587668178277-295251f900ce?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1587668178277-295251f900ce?q=80&w=900&auto=format&fit=crop"
+                  alt="Éclair au Chocolat"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Éclair au Chocolat</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 68.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.9</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="pastry"
+              data-name="Tarte au Citron"
+              data-price="Rp 72.000"
+              data-rating="4.8"
+              data-desc="Kulit pastry renyah dengan krim lemon Amalfi yang segar dan seimbang."
+              data-img="https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=900&auto=format&fit=crop"
+                  alt="Tarte au Citron"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Tarte au Citron</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 72.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.8</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="pastry"
+              data-name="Mille-Feuille"
+              data-price="Rp 85.000"
+              data-rating="5.0"
+              data-desc="Lapisan puff pastry karamelisasi dengan krim pastry vanila Bourbon."
+              data-img="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?q=80&w=900&auto=format&fit=crop"
+                  alt="Mille-Feuille"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Mille-Feuille</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 85.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 5.0</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="cake"
+              data-name="Fraisier"
+              data-price="Rp 95.000"
+              data-rating="4.9"
+              data-desc="Sponge almond lembut, krim mousseline, dan stroberi segar musim panas."
+              data-img="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=900&auto=format&fit=crop"
+                  alt="Fraisier"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Fraisier</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 95.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.9</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="pastry"
+              data-name="Paris-Brest"
+              data-price="Rp 78.000"
+              data-rating="4.7"
+              data-desc="Choux berbentuk cincin dengan krim praline hazelnut panggang."
+              data-img="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=80&w=900&auto=format&fit=crop"
+                  alt="Paris-Brest"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Paris-Brest</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 78.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.7</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="cake"
+              data-name="Opéra Cake"
+              data-price="Rp 110.000"
+              data-rating="5.0"
+              data-desc="Lapisan sponge almond, ganache dark chocolate, dan buttercream kopi klasik."
+              data-img="https://images.unsplash.com/photo-1464195244916-405fa0a82545?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1464195244916-405fa0a82545?q=80&w=900&auto=format&fit=crop"
+                  alt="Opéra Cake"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Opéra Cake</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 110.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 5.0</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="pastry"
+              data-name="Croissant Amandine"
+              data-price="Rp 45.000"
+              data-rating="4.8"
+              data-desc="Croissant mentega dipanggang dua kali dengan frangipane almond."
+              data-img="https://images.unsplash.com/photo-1555326567-98ae2405596b?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1555326567-98ae2405596b?q=80&w=900&auto=format&fit=crop"
+                  alt="Croissant Amandine"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Croissant Amandine</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 45.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.8</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="petit"
+              data-name="Macaron Tower"
+              data-price="Rp 135.000"
+              data-rating="4.9"
+              data-desc="Sepuluh rasa macaron pilihan, disusun bertingkat untuk perayaan spesial."
+              data-img="https://images.unsplash.com/photo-1558326567-98ae2405596b?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1558326567-98ae2405596b?q=80&w=900&auto=format&fit=crop"
+                  alt="Macaron Tower"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Macaron Tower</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 135.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.9</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="cake"
+              data-name="Cheesecake Basque"
+              data-price="Rp 92.000"
+              data-rating="4.8"
+              data-desc="Cheesecake gaya Basque dengan permukaan karamel gosong khas dan tekstur creamy."
+              data-img="https://images.unsplash.com/photo-1524351199678-941a58a3df50?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1524351199678-941a58a3df50?q=80&w=900&auto=format&fit=crop"
+                  alt="Cheesecake Basque"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Cheesecake Basque</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 92.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.8</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="cake"
+              data-name="Red Velvet Royale"
+              data-price="Rp 98.000"
+              data-rating="4.7"
+              data-desc="Sponge red velvet lembut berlapis cream cheese frosting yang ringan."
+              data-img="https://images.unsplash.com/photo-1586985289906-406988974504?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1586985289906-406988974504?q=80&w=900&auto=format&fit=crop"
+                  alt="Red Velvet Royale"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Red Velvet Royale</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 98.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.7</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="petit"
+              data-name="Pistachio Financier"
+              data-price="Rp 58.000"
+              data-rating="4.9"
+              data-desc="Kue almond mungil dengan pistachio Sisilia, lembab dan kaya rasa."
+              data-img="https://images.unsplash.com/photo-1567234669003-dce7a7a88821?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1567234669003-dce7a7a88821?q=80&w=900&auto=format&fit=crop"
+                  alt="Pistachio Financier"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Pistachio Financier</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 58.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 4.9</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="product-card reveal-up"
+              data-cat="cake"
+              data-name="Rose Lychee Entremet"
+              data-price="Rp 118.000"
+              data-rating="5.0"
+              data-desc="Mousse lychee dan mawar berlapis dengan inti raspberry, dilapisi glaze mengilap."
+              data-img="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=1200&auto=format&fit=crop"
+            >
+              <div class="product-card__image">
+                <img
+                  src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=900&auto=format&fit=crop"
+                  alt="Rose Lychee Entremet"
+                />
+                <button class="product-card__view" data-cursor="View">
+                  Quick View
+                </button>
+              </div>
+              <div class="product-card__info">
+                <h3>Rose Lychee Entremet</h3>
+                <div class="product-card__meta">
+                  <span class="price">Rp 118.000</span
+                  ><span class="rating"
+                    ><i class="fa-solid fa-star"></i> 5.0</span
+                  >
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-      <div class="container footer-grid">
-        <div class="footer-col">
-          <a href="#" class="logo">Sweet <span>Heaven</span></a>
-          <p style="margin-top: 20px">
-            Menghadirkan standar patisserie internasional ke meja Anda sejak
-            1995. Kemewahan dalam setiap gigitan.
+      <!-- ============ SPECIAL COLLECTION ============ -->
+      <section class="collection" id="collection">
+        <div class="container collection__grid">
+          <div class="collection__image reveal-image">
+            <img
+              src="https://images.unsplash.com/photo-1622567433810-6a1524d54935?q=80&w=1200&auto=format&fit=crop"
+              alt="Sweet Heaven anniversary collection cake"
+            />
+          </div>
+          <div class="collection__text">
+            <p class="eyebrow reveal-fade">Limited Edition</p>
+            <h2 class="reveal-fade">
+              The Anniversary <span class="italic">Collection</span>
+            </h2>
+            <p class="reveal-fade">
+              Rangkaian terbatas yang merayakan warisan rasa kami — dibuat dalam
+              jumlah sangat terbatas, untuk momen yang layak dikenang.
+            </p>
+            <a
+              href="https://wa.me/6281234567890"
+              target="_blank"
+              rel="noopener"
+              class="btn btn--primary magnetic reveal-fade"
+              >Reserve Yours</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ GALLERY ============ -->
+      <section class="gallery" id="gallery">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow reveal-fade">Gallery</p>
+            <h2 class="reveal-fade">Moments of Sweetness</h2>
+          </div>
+          <div class="gallery__grid" id="galleryGrid">
+            <div class="gallery__item reveal-up" style="--h: 340px">
+              <img
+                src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery cake detail"
+                data-cursor="Zoom"
+              />
+            </div>
+            <div class="gallery__item reveal-up" style="--h: 420px">
+              <img
+                src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery pastry detail"
+                data-cursor="Zoom"
+              />
+            </div>
+            <div class="gallery__item reveal-up" style="--h: 280px">
+              <img
+                src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery macarons"
+                data-cursor="Zoom"
+              />
+            </div>
+            <div class="gallery__item reveal-up" style="--h: 380px">
+              <img
+                src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery cake slice"
+                data-cursor="Zoom"
+              />
+            </div>
+            <div class="gallery__item reveal-up" style="--h: 300px">
+              <img
+                src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery chocolate dessert"
+                data-cursor="Zoom"
+              />
+            </div>
+            <div class="gallery__item reveal-up" style="--h: 400px">
+              <img
+                src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=80&w=1200&auto=format&fit=crop"
+                alt="Gallery croissants"
+                data-cursor="Zoom"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TESTIMONIAL ============ -->
+      <section class="testimonial">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow reveal-fade">Testimonials</p>
+            <h2 class="reveal-fade">What They're Saying</h2>
+          </div>
+
+          <div class="swiper testimonial-swiper reveal-fade">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="testi-card">
+                  <div class="testi-card__stars">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p>
+                    Setiap gigitan terasa seperti karya seni. Sweet Heaven
+                    mengubah cara saya memandang kue ulang tahun.
+                  </p>
+                  <div class="testi-card__author">
+                    <img
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop"
+                      alt="Amanda Putri"
+                    />
+                    <div><span>Amanda Putri</span><small>Jakarta</small></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="testi-card">
+                  <div class="testi-card__stars">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p>
+                    Tekstur, presentasi, rasa — semua seimbang sempurna. Ini
+                    level bakery internasional.
+                  </p>
+                  <div class="testi-card__author">
+                    <img
+                      src="https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=200&auto=format&fit=crop"
+                      alt="Michael Tanuwijaya"
+                    />
+                    <div>
+                      <span>Michael Tanuwijaya</span><small>Medan</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="testi-card">
+                  <div class="testi-card__stars">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star-half-stroke"></i>
+                  </div>
+                  <p>
+                    Layanan hangat, pengiriman rapi, dan kuenya selalu segar.
+                    Pelanggan tetap sejak tahun pertama buka.
+                  </p>
+                  <div class="testi-card__author">
+                    <img
+                      src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=200&auto=format&fit=crop"
+                      alt="Clara Wijaya"
+                    />
+                    <div><span>Clara Wijaya</span><small>Surabaya</small></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="faq" id="faq">
+        <div class="container faq__wrap">
+          <div class="section-head">
+            <p class="eyebrow reveal-fade">FAQ</p>
+            <h2 class="reveal-fade">Good to Know</h2>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion__item reveal-up">
+              <button class="accordion__head">
+                <span>Bagaimana cara memesan kue custom?</span>
+                <i class="fa-light fa-plus"></i>
+              </button>
+              <div class="accordion__body">
+                <p>
+                  Anda dapat menghubungi kami melalui WhatsApp dengan referensi
+                  desain, ukuran, dan tanggal pengambilan minimal 3 hari
+                  sebelumnya.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal-up">
+              <button class="accordion__head">
+                <span>Apakah tersedia pengiriman ke luar kota?</span>
+                <i class="fa-light fa-plus"></i>
+              </button>
+              <div class="accordion__body">
+                <p>
+                  Saat ini pengiriman melayani area dalam kota dengan kemasan
+                  pendingin khusus untuk menjaga kesegaran selama perjalanan.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal-up">
+              <button class="accordion__head">
+                <span>Bahan apa yang digunakan?</span>
+                <i class="fa-light fa-plus"></i>
+              </button>
+              <div class="accordion__body">
+                <p>
+                  Kami hanya menggunakan mentega Prancis, cokelat single-origin,
+                  dan buah segar musiman tanpa bahan pengawet.
+                </p>
+              </div>
+            </div>
+            <div class="accordion__item reveal-up">
+              <button class="accordion__head">
+                <span>Apakah tersedia opsi tanpa gula / vegan?</span>
+                <i class="fa-light fa-plus"></i>
+              </button>
+              <div class="accordion__body">
+                <p>
+                  Ya, beberapa varian tersedia dalam versi rendah gula dan
+                  vegan. Silakan tanyakan ketersediaan saat memesan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ NEWSLETTER ============ -->
+      <section class="newsletter">
+        <div class="container newsletter__inner reveal-fade">
+          <h2>Stay Sweetly Informed</h2>
+          <p>
+            Dapatkan kabar koleksi terbaru dan penawaran eksklusif langsung ke
+            email Anda.
           </p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-pinterest"></i></a>
+          <form class="newsletter__form" id="newsletterForm">
+            <input type="email" placeholder="Email Anda" required />
+            <button type="submit" class="btn btn--primary">Subscribe</button>
+          </form>
+          <p class="newsletter__note" id="newsletterNote"></p>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section class="contact" id="contact">
+        <div class="container contact__grid">
+          <div class="contact__info reveal-fade">
+            <p class="eyebrow">Visit Us</p>
+            <h2>Come Say Hello</h2>
+            <ul>
+              <li>
+                <i class="fa-light fa-location-dot"></i> Jl. Diponegoro No. 21,
+                Medan, Sumatera Utara
+              </li>
+              <li>
+                <i class="fa-brands fa-whatsapp"></i>
+                <a
+                  href="https://wa.me/6281234567890"
+                  target="_blank"
+                  rel="noopener"
+                  >+62 812-3456-7890</a
+                >
+              </li>
+              <li>
+                <i class="fa-light fa-clock"></i> Senin – Minggu, 08.00 – 21.00
+              </li>
+            </ul>
+          </div>
+          <div class="contact__map reveal-fade">
+            <iframe
+              src="https://maps.google.com/maps?q=Medan,Sumatera%20Utara&t=&z=14&ie=UTF8&output=embed"
+              loading="lazy"
+              title="Sweet Heaven location map"
+            ></iframe>
           </div>
         </div>
-        <div class="footer-col">
-          <h4>Explore</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Our Philosophy</a></li>
-            <li><a href="#menu">Signature Menu</a></li>
-          </ul>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="container footer__grid">
+        <div class="footer__brand">
+          <a href="#hero" class="navbar__logo">Sweet<span>Heaven</span></a>
+          <p>Luxury patisserie, crafted daily.</p>
         </div>
-        <div class="footer-col">
-          <h4>Inquiry</h4>
-          <ul>
-            <li>Jakarta, Indonesia</li>
-            <li>hello@sweetheaven.com</li>
-            <li>+62 812 3456 789</li>
-          </ul>
+        <div class="footer__links">
+          <h4>Quick Links</h4>
+          <a href="#about">About</a>
+          <a href="#products">Menu</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer__social">
+          <h4>Follow Us</h4>
+          <div class="footer__social-icons">
+            <a href="#" aria-label="Instagram"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="TikTok"
+              ><i class="fa-brands fa-tiktok"></i
+            ></a>
+          </div>
         </div>
       </div>
-      <div class="copyright text-center">
-        &copy; 2024 SWEET HEAVEN BAKERY. DESIGNED FOR ELEGANCE. NO BLACK USED.
+      <div class="footer__bottom">
+        <p>&copy; 2026 Sweet Heaven. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fa-light fa-arrow-up"></i>
+    </button>
 
-    <script>
-      // Smooth Scroll Lenis
-      const lenis = new Lenis();
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
+    <!-- ============ QUICK VIEW MODAL ============ -->
+    <div class="modal" id="quickViewModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close></div>
+      <div class="modal__panel">
+        <button class="modal__close" data-close aria-label="Close">
+          <i class="fa-light fa-xmark"></i>
+        </button>
+        <div class="modal__image"><img id="qvImage" src="" alt="" /></div>
+        <div class="modal__body">
+          <p class="eyebrow" id="qvCat">Signature</p>
+          <h3 id="qvName">Product Name</h3>
+          <p id="qvDesc" class="modal__desc"></p>
+          <div class="modal__meta">
+            <span class="price" id="qvPrice"></span>
+            <span class="rating"
+              ><i class="fa-solid fa-star"></i> <span id="qvRating"></span
+            ></span>
+          </div>
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--primary"
+            id="qvOrder"
+            >Order via WhatsApp</a
+          >
+        </div>
+      </div>
+    </div>
 
-      // GSAP Animations
-      gsap.registerPlugin(ScrollTrigger);
+    <!-- ============ LIGHTBOX ============ -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lightbox__backdrop" data-close></div>
+      <button class="lightbox__close" data-close aria-label="Close">
+        <i class="fa-light fa-xmark"></i>
+      </button>
+      <button
+        class="lightbox__nav lightbox__nav--prev"
+        id="lbPrev"
+        aria-label="Previous"
+      >
+        <i class="fa-light fa-chevron-left"></i>
+      </button>
+      <img class="lightbox__image" id="lightboxImage" src="" alt="" />
+      <button
+        class="lightbox__nav lightbox__nav--next"
+        id="lbNext"
+        aria-label="Next"
+      >
+        <i class="fa-light fa-chevron-right"></i>
+      </button>
+    </div>
 
-      // Loader
-      window.addEventListener("load", () => {
-        gsap.to("#loader", {
-          yPercent: -100,
-          duration: 1.2,
-          ease: "expo.inOut",
-          delay: 0.5,
-        });
-
-        // Hero
-        gsap.to(".hero-title", {
-          opacity: 1,
-          y: 0,
-          duration: 1.5,
-          ease: "expo.out",
-          delay: 1,
-        });
-        gsap.to(".hero-tag", { opacity: 1, y: 0, duration: 1, delay: 0.8 });
-      });
-
-      // Scroll Reveals
-      gsap.utils.toArray(".reveal").forEach((el) => {
-        gsap.to(el, {
-          scrollTrigger: {
-            trigger: el,
-            start: "top 90%",
-          },
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power3.out",
-        });
-      });
-
-      // Navbar Scroll
-      window.addEventListener("scroll", () => {
-        const nav = document.getElementById("navbar");
-        if (window.scrollY > 80) nav.classList.add("scrolled");
-        else nav.classList.remove("scrolled");
-      });
-
-      // FAQ Toggle
-      document.querySelectorAll(".faq-item").forEach((item) => {
-        item.addEventListener("click", () => {
-          item.classList.toggle("active");
-          const icon = item.querySelector("i");
-          icon.classList.toggle("fa-plus");
-          icon.classList.toggle("fa-minus");
-        });
-      });
-    </script>
+    <!-- ============ SCRIPTS ============ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
